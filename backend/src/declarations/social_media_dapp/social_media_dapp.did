@@ -1,0 +1,52 @@
+type SocialMediaDapp = 
+ service {
+   addComment: (PostId, text) -> (PostResult);
+   createPost: (text) -> (PostResult);
+   getAllPosts: () -> (vec Post__1) query;
+   getPost: (PostId) -> (PostResult) query;
+   likePost: (PostId) -> (PostResult);
+   unlikePost: (PostId) -> (PostResult);
+ };
+type Post__1 = 
+ record {
+   author: principal;
+   comments: vec Comment;
+   content: text;
+   id: PostId__1;
+   likes: nat;
+   timestamp: int;
+   user_likes: vec principal;
+ };
+type PostResult = 
+ variant {
+   err: Error;
+   ok: Post;
+ };
+type PostId__1 = nat;
+type PostId = nat;
+type Post = 
+ record {
+   author: principal;
+   comments: vec Comment;
+   content: text;
+   id: PostId__1;
+   likes: nat;
+   timestamp: int;
+   user_likes: vec principal;
+ };
+type Error = 
+ variant {
+   AlreadyLiked;
+   InvalidInput;
+   NotAuthorized;
+   NotFound;
+   NotLiked;
+   SystemError;
+ };
+type Comment = 
+ record {
+   author: principal;
+   content: text;
+   timestamp: int;
+ };
+service : () -> SocialMediaDapp

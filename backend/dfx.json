@@ -1,0 +1,28 @@
+{
+    "canisters": {
+        "user_manager": {
+            "main": "src/actors/UserManager.mo",
+            "type": "motoko"
+        },
+        "social_media_dapp": {
+            "main": "src/actors/SocialMediaDapp.mo",
+            "type": "motoko"
+        },
+        "social_media_dapp_test": {
+            "main": "tests/SocialMediaDappTests.mo",
+            "type": "motoko"
+        }
+    },
+    "networks": {
+        "local": {
+            "bind": "127.0.0.1:8000"
+        }
+    },
+    "defaults": {
+        "build": {
+            "args": "",
+            "packtool": ""
+        }
+    },
+    "version": 1
+}

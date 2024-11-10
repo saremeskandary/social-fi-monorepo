@@ -1,0 +1,6 @@
+.dfx/
+node_modules/
+dist/
+*.env
+latestCodeStructure.json
+deployment.log

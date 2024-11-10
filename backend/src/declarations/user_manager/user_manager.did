@@ -1,0 +1,40 @@
+type UserProfile = 
+ record {
+   bio: opt text;
+   followers: vec UserId;
+   following: vec UserId;
+   id: UserId;
+   joinDate: int;
+   profilePic: opt text;
+   username: text;
+ };
+type UserManager = 
+ service {
+   followUser: (UserId__1) -> (Result);
+   getFollowers: (UserId__1) -> (Result_1) query;
+   getFollowing: (UserId__1) -> (Result_1) query;
+   getProfile: (UserId__1) -> (Result) query;
+   registerUser: (UserProfile) -> (Result);
+   unfollowUser: (UserId__1) -> (Result);
+   updateProfile: (text, opt text, opt text) -> (Result);
+ };
+type UserId__1 = principal;
+type UserId = principal;
+type Result_1 = 
+ variant {
+   err: Error;
+   ok: vec UserProfile;
+ };
+type Result = 
+ variant {
+   err: Error;
+   ok: UserProfile;
+ };
+type Error = 
+ variant {
+   InvalidInput;
+   NotAuthorized;
+   NotFound;
+   SystemError;
+ };
+service : () -> UserManager

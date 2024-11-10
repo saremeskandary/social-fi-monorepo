@@ -1,0 +1,10 @@
+type UserManagerTests = 
+ service {
+   getCycleBalance: () -> (nat) query;
+   initialize: () -> ();
+   runAllTests: () -> (bool);
+   testFollowUnfollow: () -> (bool);
+   testProfileUpdate: () -> (bool);
+   testUserRegistration: () -> (bool);
+ };
+service : () -> UserManagerTests

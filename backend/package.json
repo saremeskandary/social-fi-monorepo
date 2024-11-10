@@ -1,0 +1,12 @@
+{
+  "name": "social-media-dapp",
+  "version": "0.1.0",
+  "scripts": {
+    "deploy:local": "dfx deploy",
+    "generate": "dfx generate && bash ./scripts/sync-declarations.sh",
+    "start": "dfx start --clean",
+    "test": "dfx test",
+    "prebuild": "npm run generate",
+    "build": "dfx build"
+  }
+}
