@@ -1,7 +1,7 @@
 ## Project Structure
 
 ```
-social-media-dapp/
+backend/
 ├── src/
 │   ├── actors/
 │   │   └── SocialMediaDapp.mo

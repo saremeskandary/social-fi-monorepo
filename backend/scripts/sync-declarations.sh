@@ -7,7 +7,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 PROJECT_ROOT="$( cd "$SCRIPT_DIR/.." &> /dev/null && pwd )"
 
 # Frontend directory path
-FRONTEND_DIR="$PROJECT_ROOT/../social-media-frontend"
+FRONTEND_DIR="$PROJECT_ROOT/../frontend"
 
 # Source declarations directory
 SOURCE_DECLARATIONS="$PROJECT_ROOT/src/declarations"

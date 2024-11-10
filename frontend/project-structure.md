@@ -1,8 +1,9 @@
 # Next.js Frontend - Decentralized Social Media Platform
 
 ## Project Structure
+
 ```
-social-media-frontend/
+frontend/
 ├── app/
 │   ├── (auth)/
 │   │   ├── login/
@@ -85,6 +86,7 @@ social-media-frontend/
 ## Directory Structure Explanation
 
 ### 1. `app/` Directory
+
 The main application directory using Next.js 13+ app router structure.
 
 ```typescript
@@ -99,11 +101,13 @@ export default function Home() {
 ```
 
 #### Route Groups
+
 - `(auth)`: Authentication-related pages
 - `(main)`: Main application pages
 - Each group has its own layout for consistent styling
 
 ### 2. `components/` Directory
+
 Reusable UI components organized by feature.
 
 ```typescript
@@ -129,6 +133,7 @@ export const PostCard = ({ post, onLike, onComment }: PostCardProps) => {
 ```
 
 ### 3. `hooks/` Directory
+
 Custom React hooks for business logic and state management.
 
 ```typescript
@@ -144,7 +149,7 @@ export function usePosts() {
       const result = await socialMediaActor.getAllPosts();
       setPosts(result);
     } catch (error) {
-      console.error('Error fetching posts:', error);
+      console.error("Error fetching posts:", error);
     } finally {
       setLoading(false);
     }
@@ -155,13 +160,14 @@ export function usePosts() {
 ```
 
 ### 4. `lib/` Directory
+
 Utility functions, constants, and type definitions.
 
 ```typescript
 // lib/dfx/index.ts
-import { Actor, HttpAgent } from '@dfinity/agent';
-import { idlFactory as socialMediaIdl } from './declarations/social_media_dapp';
-import { idlFactory as userManagerIdl } from './declarations/user_manager';
+import { Actor, HttpAgent } from "@dfinity/agent";
+import { idlFactory as socialMediaIdl } from "./declarations/social_media_dapp";
+import { idlFactory as userManagerIdl } from "./declarations/user_manager";
 
 export async function getSocialMediaActor() {
   const agent = new HttpAgent({ host: process.env.NEXT_PUBLIC_IC_HOST });
@@ -173,6 +179,7 @@ export async function getSocialMediaActor() {
 ```
 
 ### 5. `providers/` Directory
+
 React context providers for global state and services.
 
 ```typescript
@@ -189,19 +196,18 @@ export const DFXProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <DFXContext.Provider value={{ actor }}>
-      {children}
-    </DFXContext.Provider>
+    <DFXContext.Provider value={{ actor }}>{children}</DFXContext.Provider>
   );
 };
 ```
 
 ### 6. `store/` Directory
+
 Redux/RTK store configuration and slices.
 
 ```typescript
 // store/slices/authSlice.ts
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface AuthState {
   user: User | null;
@@ -209,7 +215,7 @@ interface AuthState {
 }
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: {
     user: null,
     isAuthenticated: false,
@@ -230,6 +236,7 @@ const authSlice = createSlice({
 ## Key Features Implementation
 
 ### 1. Authentication Flow
+
 ```typescript
 // hooks/useAuth.ts
 export function useAuth() {
@@ -242,10 +249,10 @@ export function useAuth() {
       const result = await userManager.getProfile(principal);
       if (result.ok) {
         dispatch(setUser(result.ok));
-        navigate('/feed');
+        navigate("/feed");
       }
     } catch (error) {
-      console.error('Login error:', error);
+      console.error("Login error:", error);
     }
   };
 
@@ -254,19 +261,20 @@ export function useAuth() {
 ```
 
 ### 2. Post Creation and Interaction
+
 ```typescript
 // components/posts/PostForm.tsx
 export const PostForm = () => {
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState("");
   const { createPost } = usePosts();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       await createPost(content);
-      setContent('');
+      setContent("");
     } catch (error) {
-      console.error('Error creating post:', error);
+      console.error("Error creating post:", error);
     }
   };
 
@@ -285,6 +293,7 @@ export const PostForm = () => {
 ```
 
 ### 3. Profile Management
+
 ```typescript
 // components/profile/ProfileHeader.tsx
 export const ProfileHeader = ({ userId }: { userId: string }) => {
@@ -310,17 +319,18 @@ export const ProfileHeader = ({ userId }: { userId: string }) => {
 ## Configuration Files
 
 ### 1. `tailwind.config.js`
+
 ```javascript
 module.exports = {
   content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
-        primary: '#3B82F6',
-        secondary: '#6B7280',
+        primary: "#3B82F6",
+        secondary: "#6B7280",
       },
     },
   },
@@ -329,6 +339,7 @@ module.exports = {
 ```
 
 ### 2. Environment Variables
+
 ```plaintext
 # .env.local
 NEXT_PUBLIC_IC_HOST=http://localhost:4943
@@ -339,16 +350,19 @@ NEXT_PUBLIC_USER_MANAGER_CANISTER_ID=xxx
 ## Setup Instructions
 
 1. Install dependencies:
+
 ```bash
 pnpm install
 ```
 
 2. Generate DFX declarations:
+
 ```bash
 dfx generate
 ```
 
 3. Start the development server:
+
 ```bash
 pnpm run dev
 ```
@@ -356,16 +370,19 @@ pnpm run dev
 ## Development Guidelines
 
 1. **Component Organization**
+
    - Use feature-based organization
    - Keep components small and focused
    - Implement proper TypeScript types
 
 2. **State Management**
+
    - Use Redux for global state
    - Use React Query for server state
    - Implement proper error handling
 
 3. **Styling**
+
    - Use Tailwind CSS for styling
    - Maintain consistent design system
    - Implement responsive design
